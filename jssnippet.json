@@ -1,0 +1,261 @@
+{
+	"puppeteer$": {
+		"prefix": "puppeteer$",
+		"body": [
+		  "const puppeteer = require('puppeteer');",
+		  "",
+		  "async function start_browser() {",
+		  "    browser = await puppeteer.launch({",
+		  "        // executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',",
+		  "        headless: false,",
+		  "        defaultViewport: null,",
+		  "        // args: ['--window-size=800,860'],",
+		  "        args: ['--no-sandbox', '--start-maximized', '--disable-setuid-sandbox', '--disable-infobars', '--window-position=0,0', '--ignore-certifcate-errors', '--ignore-certifcate-errors-spki-list',]",
+		  "    })",
+		  "}",
+		  "",
+		  "",
+		  "start_browser().then(async () => {",
+		  "    const page = await browser.newPage();",
+		  "    await page.goto(\"https://www.google.fr\", { timeout: 0, waitUntil: 'domcontentloaded' });",
+		  "",
+		  "})"
+		],
+		"description": "puppeteer$"
+	  },
+	  "page$Browser": {
+		"prefix": "page$Browser",
+		"body": [
+		  "const page = await browser.newPage();"
+		],
+		"description": "page$Browser"
+	  },
+	  "page$NewPage": {
+		"prefix": "page$Goto",
+		"body": [
+		  "await page.goto(\"value\", { timeout: 0, waitUntil: 'load' });",
+		  ""
+		],
+		"description": "page$Goto"
+	  },
+	  "page$evaluate": {
+		"prefix": "page$evaluate",
+		"body": [
+		  "await page.evaluate(() =>  );"
+		],
+		"description": "page$evaluate"
+	  },
+	  "array$1": {
+		"prefix": "array$1",
+		"body": [
+		  "Array.from(document.querySelectorAll('a'), ",
+		  "       e => e.href)"
+		],
+		"description": "array$1"
+	  },
+	  "array$2": {
+		"prefix": "array$2",
+		"body": [
+		  "Array.from(document.querySelectorAll(\"a\"))",
+		  ".map((link) => link.innerText)"
+		],
+		"description": "array$2"
+	  },
+	  "click$": {
+		"prefix": "click$",
+		"body": [
+		  "let elements = document.querySelectorAll('value');",
+		  "for (let element of elements)",
+		  "element.click();"
+		],
+		"description": "click$"
+	  },
+	  "click$1": {
+		"prefix": "click$1",
+		"body": [
+		  "Array.from(document.querySelectorAll('[data-control-name=\"people_connect\"]'),",
+		  "e => e.click())"
+		],
+		"description": "click$1"
+	  },
+	  "smooth": {
+		"prefix": "smooth",
+		"body": [
+		  "// 1 - Import de puppeteer",
+		  "const puppeteer = require('puppeteer')",
+		  "",
+		  "/*",
+		  "// 2 - Récupération des URLs de toutes les pages à visiter",
+		  "- waitFor(\"body\"): met le script en pause le temps que la page se charge",
+		  "- document.querySelectorAll(selector): renvoie tous les noeuds qui vérifient le selecteur",
+		  "- [...document.querySelectorAll(selector)]: caste les réponses en tableau",
+		  "- Array.map(link => link.href): récupère les attributs href de tous les liens",
+		  "*/",
+		  "const getAllUrl = async browser => {",
+		  "  const page = await browser.newPage()",
+		  "  await page.goto('http://books.toscrape.com/')",
+		  "  await page.waitFor('body')",
+		  "  const result = await page.evaluate(() =>",
+		  "    [...document.querySelectorAll('.product_pod a')].map(link => link.href),",
+		  "  )",
+		  "  return result",
+		  "}",
+		  "",
+		  "// 3 - Récupération du prix et du tarif d'un livre à partir d'une url (voir exo #2)",
+		  "const getDataFromUrl = async (browser, url) => {",
+		  "  const page = await browser.newPage()",
+		  "  await page.goto(url)",
+		  "  await page.waitFor('body')",
+		  "  return page.evaluate(() => {",
+		  "    let title = document.querySelector('h1').innerText",
+		  "    let price = document.querySelector('.price_color').innerText",
+		  "    return { title, price }",
+		  "  })",
+		  "}",
+		  "",
+		  "/*",
+		  "// 4 - Fonction principale : instanciation d'un navigateur et renvoi des résultats",
+		  "- urlList.map(url => getDataFromUrl(browser, url)):",
+		  "appelle la fonction getDataFromUrl sur chaque URL de `urlList` et renvoi un tableau",
+		  "",
+		  "- await Promise.all(promesse1, promesse2, promesse3):",
+		  "bloque de programme tant que toutes les promesses ne sont pas résolues",
+		  "*/",
+		  "const scrap = async () => {",
+		  "  const browser = await puppeteer.launch({ headless: false })",
+		  "  const urlList = await getAllUrl(browser)",
+		  "  const results = await Promise.all(",
+		  "    urlList.map(url => getDataFromUrl(browser, url)),",
+		  "  )",
+		  "  browser.close()",
+		  "  return results",
+		  "}",
+		  "",
+		  "// 5 - Appel la fonction `scrap()`, affichage les résulats et catch les erreurs",
+		  "scrap()",
+		  "  .then(value => {",
+		  "    console.log(value)",
+		  "  })",
+		  "  .catch(e => console.log(`error: ${e}`))"
+		],
+		"description": "smooth"
+	  },
+	  "page$br.close": {
+		"prefix": "page$br.close",
+		"body": [
+		  "await browser.close()"
+		],
+		"description": "page$br.close"
+	  },
+	  "page$close": {
+		"prefix": "page$close",
+		"body": [
+		  "await page.close()"
+		],
+		"description": "page$close"
+	  },
+	  "waitFor$": {
+		"prefix": "waitFor$",
+		"body": [
+		  "await page.waitFor(1000)"
+		],
+		"description": "waitFor$"
+	  },
+	  "waitForSelector$": {
+		"prefix": "waitForSelector$",
+		"body": [
+		  "await page.waitForSelector('sel')"
+		],
+		"description": "waitForSelector$"
+	  },
+	  "require$": {
+		"prefix": "require$",
+		"body": [
+		  "var PORT = process.env.PORT || 8080",
+		  "const express = require('express')",
+		  "const http = require('http');",
+		  "const app = express()",
+		  "const server = http.createServer(app);",
+		  "",
+		  "var io = require('socket.io').listen(server);",
+		  "",
+		  "app.set('views', './views')",
+		  "app.set('view engine', 'ejs')",
+		  "app.use('/assets', express.static('public'))",
+		  "app.get('/*', (req, res) => {",
+		  "res.render('index.ejs')",
+		  "})",
+		  "",
+		  "server.listen(PORT, () => console.log('Server started'))"
+		],
+		"description": "require$"
+	  },
+	  "puppeteer$require": {
+		"prefix": "puppeteer$require",
+		"body": [
+		  "const puppeteer = require('puppeteer');"
+		],
+		"description": "puppeteer$require"
+	  },
+	  "page$click": {
+		"prefix": "page$click",
+		"body": [
+		  "await page.click('')"
+		],
+		"description": "page$click"
+	  },
+	  "page$key": {
+		"prefix": "page$key",
+		"body": [
+		  "await page.keyboard.type('value');"
+		],
+		"description": "page$key"
+	  },
+	  "socket$connection": {
+		"prefix": "socket$connection",
+		"body": [
+		  "io.sockets.on('connection', async (socket) => {",
+		  "",
+		  "})"
+		],
+		"description": "socket$connection"
+	  },
+	  "socket$disconnect": {
+		"prefix": "socket$disconnect",
+		"body": [
+		  "socket.on('disconnect', function () {",
+		  "",
+		  "});"
+		],
+		"description": "socket$disconnect"
+	  },
+	  "socket$em": {
+		"prefix": "socket$em",
+		"body": [
+		  "await socket.emit('data', value);"
+		],
+		"description": "socket$em"
+	  },
+	  "socket$on": {
+		"prefix": "socket$on",
+		"body": [
+		  "socket.on('data', async (value) => {",
+		  "    console.log(value)",
+		  "});"
+		],
+		"description": "socket$on"
+	  },
+	  "async$": {
+		"prefix": "async$",
+		"body": [
+		  "(async () => {",
+		  "",
+		  "})();"
+		],
+		"description": "async$"
+	  }
+	  
+	  
+
+
+}
